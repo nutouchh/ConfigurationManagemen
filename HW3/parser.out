@@ -1,0 +1,327 @@
+Grammar:
+
+Rule 0     S' -> files
+Rule 1     files -> file files
+Rule 2     files -> empty
+Rule 3     file -> group student subject
+Rule 4     subject -> FIRST_BRACKET title LAST_BRACKET
+Rule 5     student -> FIRST_BRACKET STUDENT info infooo LAST_BRACKET
+Rule 6     group -> FIRST_BRACKET GROUP name names LAST_BRACKET
+Rule 7     infooo -> empty
+Rule 8     infooo -> info infooo
+Rule 9     info -> STRING
+Rule 10    title -> name
+Rule 11    names -> empty
+Rule 12    names -> name names
+Rule 13    name -> STRING
+Rule 14    name -> NAME
+Rule 15    name -> DIGIT
+Rule 16    empty -> <empty>
+
+Terminals, with rules where they appear:
+
+DIGIT                : 15
+FIRST_BRACKET        : 4 5 6
+GROUP                : 6
+LAST_BRACKET         : 4 5 6
+NAME                 : 14
+STRING               : 9 13
+STUDENT              : 5
+error                : 
+
+Nonterminals, with rules where they appear:
+
+empty                : 2 7 11
+file                 : 1
+files                : 1 0
+group                : 3
+info                 : 5 8
+infooo               : 5 8
+name                 : 6 10 12
+names                : 6 12
+student              : 3
+subject              : 3
+title                : 4
+
+
+state 0
+
+    (0) S' -> . files
+    (1) files -> . file files
+    (2) files -> . empty
+    (3) file -> . group student subject
+    (16) empty -> .
+    (6) group -> . FIRST_BRACKET GROUP name names LAST_BRACKET
+    $end            reduce using rule 16 (empty -> .)
+    FIRST_BRACKET   shift and go to state 5
+
+    files                          shift and go to state 1
+    file                           shift and go to state 2
+    empty                          shift and go to state 3
+    group                          shift and go to state 4
+
+state 1
+
+    (0) S' -> files .
+
+
+state 2
+
+    (1) files -> file . files
+    (1) files -> . file files
+    (2) files -> . empty
+    (3) file -> . group student subject
+    (16) empty -> .
+    (6) group -> . FIRST_BRACKET GROUP name names LAST_BRACKET
+    $end            reduce using rule 16 (empty -> .)
+    FIRST_BRACKET   shift and go to state 5
+
+    file                           shift and go to state 2
+    files                          shift and go to state 6
+    empty                          shift and go to state 3
+    group                          shift and go to state 4
+
+state 3
+
+    (2) files -> empty .
+    $end            reduce using rule 2 (files -> empty .)
+
+
+state 4
+
+    (3) file -> group . student subject
+    (5) student -> . FIRST_BRACKET STUDENT info infooo LAST_BRACKET
+    FIRST_BRACKET   shift and go to state 8
+
+    student                        shift and go to state 7
+
+state 5
+
+    (6) group -> FIRST_BRACKET . GROUP name names LAST_BRACKET
+    GROUP           shift and go to state 9
+
+
+state 6
+
+    (1) files -> file files .
+    $end            reduce using rule 1 (files -> file files .)
+
+
+state 7
+
+    (3) file -> group student . subject
+    (4) subject -> . FIRST_BRACKET title LAST_BRACKET
+    FIRST_BRACKET   shift and go to state 11
+
+    subject                        shift and go to state 10
+
+state 8
+
+    (5) student -> FIRST_BRACKET . STUDENT info infooo LAST_BRACKET
+    STUDENT         shift and go to state 12
+
+
+state 9
+
+    (6) group -> FIRST_BRACKET GROUP . name names LAST_BRACKET
+    (13) name -> . STRING
+    (14) name -> . NAME
+    (15) name -> . DIGIT
+    STRING          shift and go to state 14
+    NAME            shift and go to state 15
+    DIGIT           shift and go to state 16
+
+    name                           shift and go to state 13
+
+state 10
+
+    (3) file -> group student subject .
+    FIRST_BRACKET   reduce using rule 3 (file -> group student subject .)
+    $end            reduce using rule 3 (file -> group student subject .)
+
+
+state 11
+
+    (4) subject -> FIRST_BRACKET . title LAST_BRACKET
+    (10) title -> . name
+    (13) name -> . STRING
+    (14) name -> . NAME
+    (15) name -> . DIGIT
+    STRING          shift and go to state 14
+    NAME            shift and go to state 15
+    DIGIT           shift and go to state 16
+
+    title                          shift and go to state 17
+    name                           shift and go to state 18
+
+state 12
+
+    (5) student -> FIRST_BRACKET STUDENT . info infooo LAST_BRACKET
+    (9) info -> . STRING
+    STRING          shift and go to state 20
+
+    info                           shift and go to state 19
+
+state 13
+
+    (6) group -> FIRST_BRACKET GROUP name . names LAST_BRACKET
+    (11) names -> . empty
+    (12) names -> . name names
+    (16) empty -> .
+    (13) name -> . STRING
+    (14) name -> . NAME
+    (15) name -> . DIGIT
+    LAST_BRACKET    reduce using rule 16 (empty -> .)
+    STRING          shift and go to state 14
+    NAME            shift and go to state 15
+    DIGIT           shift and go to state 16
+
+    name                           shift and go to state 21
+    names                          shift and go to state 22
+    empty                          shift and go to state 23
+
+state 14
+
+    (13) name -> STRING .
+    STRING          reduce using rule 13 (name -> STRING .)
+    NAME            reduce using rule 13 (name -> STRING .)
+    DIGIT           reduce using rule 13 (name -> STRING .)
+    LAST_BRACKET    reduce using rule 13 (name -> STRING .)
+
+
+state 15
+
+    (14) name -> NAME .
+    STRING          reduce using rule 14 (name -> NAME .)
+    NAME            reduce using rule 14 (name -> NAME .)
+    DIGIT           reduce using rule 14 (name -> NAME .)
+    LAST_BRACKET    reduce using rule 14 (name -> NAME .)
+
+
+state 16
+
+    (15) name -> DIGIT .
+    STRING          reduce using rule 15 (name -> DIGIT .)
+    NAME            reduce using rule 15 (name -> DIGIT .)
+    DIGIT           reduce using rule 15 (name -> DIGIT .)
+    LAST_BRACKET    reduce using rule 15 (name -> DIGIT .)
+
+
+state 17
+
+    (4) subject -> FIRST_BRACKET title . LAST_BRACKET
+    LAST_BRACKET    shift and go to state 24
+
+
+state 18
+
+    (10) title -> name .
+    LAST_BRACKET    reduce using rule 10 (title -> name .)
+
+
+state 19
+
+    (5) student -> FIRST_BRACKET STUDENT info . infooo LAST_BRACKET
+    (7) infooo -> . empty
+    (8) infooo -> . info infooo
+    (16) empty -> .
+    (9) info -> . STRING
+    LAST_BRACKET    reduce using rule 16 (empty -> .)
+    STRING          shift and go to state 20
+
+    info                           shift and go to state 25
+    infooo                         shift and go to state 26
+    empty                          shift and go to state 27
+
+state 20
+
+    (9) info -> STRING .
+    STRING          reduce using rule 9 (info -> STRING .)
+    LAST_BRACKET    reduce using rule 9 (info -> STRING .)
+
+
+state 21
+
+    (12) names -> name . names
+    (11) names -> . empty
+    (12) names -> . name names
+    (16) empty -> .
+    (13) name -> . STRING
+    (14) name -> . NAME
+    (15) name -> . DIGIT
+    LAST_BRACKET    reduce using rule 16 (empty -> .)
+    STRING          shift and go to state 14
+    NAME            shift and go to state 15
+    DIGIT           shift and go to state 16
+
+    name                           shift and go to state 21
+    names                          shift and go to state 28
+    empty                          shift and go to state 23
+
+state 22
+
+    (6) group -> FIRST_BRACKET GROUP name names . LAST_BRACKET
+    LAST_BRACKET    shift and go to state 29
+
+
+state 23
+
+    (11) names -> empty .
+    LAST_BRACKET    reduce using rule 11 (names -> empty .)
+
+
+state 24
+
+    (4) subject -> FIRST_BRACKET title LAST_BRACKET .
+    FIRST_BRACKET   reduce using rule 4 (subject -> FIRST_BRACKET title LAST_BRACKET .)
+    $end            reduce using rule 4 (subject -> FIRST_BRACKET title LAST_BRACKET .)
+
+
+state 25
+
+    (8) infooo -> info . infooo
+    (7) infooo -> . empty
+    (8) infooo -> . info infooo
+    (16) empty -> .
+    (9) info -> . STRING
+    LAST_BRACKET    reduce using rule 16 (empty -> .)
+    STRING          shift and go to state 20
+
+    info                           shift and go to state 25
+    infooo                         shift and go to state 30
+    empty                          shift and go to state 27
+
+state 26
+
+    (5) student -> FIRST_BRACKET STUDENT info infooo . LAST_BRACKET
+    LAST_BRACKET    shift and go to state 31
+
+
+state 27
+
+    (7) infooo -> empty .
+    LAST_BRACKET    reduce using rule 7 (infooo -> empty .)
+
+
+state 28
+
+    (12) names -> name names .
+    LAST_BRACKET    reduce using rule 12 (names -> name names .)
+
+
+state 29
+
+    (6) group -> FIRST_BRACKET GROUP name names LAST_BRACKET .
+    FIRST_BRACKET   reduce using rule 6 (group -> FIRST_BRACKET GROUP name names LAST_BRACKET .)
+
+
+state 30
+
+    (8) infooo -> info infooo .
+    LAST_BRACKET    reduce using rule 8 (infooo -> info infooo .)
+
+
+state 31
+
+    (5) student -> FIRST_BRACKET STUDENT info infooo LAST_BRACKET .
+    FIRST_BRACKET   reduce using rule 5 (student -> FIRST_BRACKET STUDENT info infooo LAST_BRACKET .)
