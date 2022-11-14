@@ -1,4 +1,4 @@
-# ConfigurationManagemen
+# ConfigurationManagement
 Some of the discipline homework
 
 ## ДЗ №2. Визуализатор зависимостей пакета
